@@ -11,7 +11,7 @@ public class Coin : MonoBehaviour
         if(collision.tag == "Player")
         {
             collision.gameObject.GetComponent<Player>().addCoin(coinCount);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

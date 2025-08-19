@@ -1,16 +1,23 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField]
+    private CinemachineVirtualCamera virtualCamera;
+
     [Header("Player Info")]
     public float speed;
     public float jumpPower;
     public GameObject respawnPos;
     public int playerHealth = 2;
 
+
     [Header("Item")]
+    [SerializeField]
+    private CoinList coinList;
     public GameObject seguen;
     public GameObject shield;
 
@@ -19,7 +26,6 @@ public class Player : MonoBehaviour
 
     bool isOnGround;
     bool isUseShoes;
-
     int playerLayer;
     int groundLyaer;
 
@@ -181,6 +187,8 @@ public class Player : MonoBehaviour
     void spawn()
     {
         Player newPlayer = Instantiate(gameObject).GetComponent<Player>();
+        virtualCamera.Follow = newPlayer.gameObject.transform; 
+        coinList.resetCoins();
     }
 
     public void addCoin(int count) => Inventory.coin += count;
